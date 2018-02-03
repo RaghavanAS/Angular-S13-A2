@@ -1,0 +1,78 @@
+<div class="well well-lg">
+ <h2> Customer Form </h2>
+<!-- Form contains 
+    1. Name
+    2. Phone Number
+    3. Email
+    4. City
+    5. D.O.B
+ -->
+  <form [formGroup]="form" (ngSubmit)="onSave(form.value)">
+      <div class="form-group">
+          <label for="name">Name</label>
+          <input 
+              type="text" 
+              class="form-control" 
+              id="name"
+              name="name"
+              formControlName="name" placeholder="Enter Name"
+              [(ngModel)]="customer.name">
+              <div *ngIf="form.controls['name'].errors && (form.controls['name'].touched || form.controls['name'].dirty)"
+              class="alert alert-danger">
+              <div *ngIf="form.controls['name'].hasError('required')">Name is required</div>
+              <div *ngIf="form.controls['name'].hasError('pattern')">Only alphabets allowed</div>
+              </div>
+      </div>
+      <div class="form-group">
+              <label for="phone">Contact</label>
+              <input type="text" class="form-control" 
+                  id="phone"
+                  name="phone"
+                  formControlName="phone" placeholder="Enter Contact #"
+                  [(ngModel)]="customer.phone">
+                  <div *ngIf="form.controls['phone'].errors && (form.controls['phone'].touched || form.controls['phone'].dirty)"
+                  class="alert alert-danger">
+                  <div *ngIf="form.controls['phone'].hasError('required')"> Mobile number is required </div>
+                  <div *ngIf="form.controls['phone'].hasError('pattern')"> Only Numbers are allowed </div>
+                  <div *ngIf="form.controls['phone'].hasError('maxlength')"> Mobile can be maximum of 10 digits </div>
+                  <div *ngIf="form.controls['phone'].hasError('minlength')"> Mobile should be manimum of 10 digits </div>
+                  </div>
+      </div>
+     <div class="form-group">
+              <label for="customerEmail">Email</label>
+              <input type="text" class="form-control" 
+                  id="customerEmail"
+                  name="customerEmail"
+                  formControlName="email" placeholder="joe@mail.com"
+                  [(ngModel)]="customer.email">
+                  <div *ngIf="form.controls['email'].errors && (form.controls['email'].touched || form.controls['email'].dirty)"
+                  class="alert alert-danger">
+                  <div *ngIf="form.controls['email'].hasError('required')"> Email is required </div>
+                  </div>  
+     </div>
+      <div class="form-group">
+          <label for="customerCity">City</label>
+          <select class="form-control" id="CustomerCity" name="CustomerCity" formControlName="city" [(ngModel)]="customer.city">
+            <option [value]="null" [disabled]="true">Select Option </option>
+            <option *ngFor="let c of cityList">{{c}}</option>
+            </select>
+      </div>
+      <div class="form-group">
+        <label for="customerBday">D.O.B</label>
+        <input type="date" class="form-control"
+                id="customerBday"
+                name="customerBday"
+                formControlName="DOB"
+                [(ngModel)]="customer.DOB">
+                <div *ngIf="form.controls['DOB'].errors && (form.controls['DOB'].touched || form.controls['DOB'].dirty)"
+                class="alert alert-danger">
+                <div *ngIf="form.controls['DOB'].hasError('required')"> D.O.B is required </div>
+                <div *ngIf="form.controls['DOB'].hasError('pattern')"> Date should be valid and in DD/MM/YYYY format</div>
+                </div> 
+      </div>
+      <button name="save" type="submit" [disabled]="form.invalid"
+          class="btn btn-success">
+          Save
+      </button>
+  </form>
+</div>

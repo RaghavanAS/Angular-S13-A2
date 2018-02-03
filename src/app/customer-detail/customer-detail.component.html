@@ -1,0 +1,31 @@
+<!-- Displaying Customer details -->
+<div class="well well-lg">
+  <!-- using search custom pipe while listing the customer details -->
+  <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <!-- Customer name -->
+          {{ customer.name | chgChar }}
+        </h3>
+      </div>
+      <div class="panel-body">
+          <!-- Contact -->
+          {{ customer.phone }}
+      </div>
+      <div class="panel-body">
+        <!-- email -->
+        {{customer.email}}
+      </div>
+      <div class="panel-body">
+        <!-- customer city -->
+        {{customer.city | uppercase }}
+      </div>
+      <div class="panel-body">
+        <!-- customer D.O.B using Pipes to display the date in m/d/yyyy format -->
+        {{customer.DOB | date: "M/d/yyyy"}}
+      </div>
+  </div>
+  <p>
+    <button class="btn btn-primary" (click)="onEdit()">Edit</button>
+  </p>
+</div>

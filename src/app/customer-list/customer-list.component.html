@@ -1,0 +1,14 @@
+<!-- button to add new customer -->
+<p>
+  <button class="btn btn-primary" (click)="onAdd()">Add</button>
+</p>
+<!-- search box -->
+<div class="panel panel-primary">
+  <input type="text" name="searchData" class="form-control" placeholder="Search" [(ngModel)]="searchData">
+</div>
+<!-- a anchor to each list of customer -->
+<div class="list-group">
+  <a [routerLink]="['/customers', customer.id]"  class="list-group-item" *ngFor="let customer of ( customers | searchBy : searchData );">
+    {{ customer.name }}
+  </a>
+</div>
